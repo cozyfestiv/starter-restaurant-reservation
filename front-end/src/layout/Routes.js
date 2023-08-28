@@ -1,9 +1,11 @@
-import React from "react";
+import React from 'react';
 
-import { Redirect, Route, Switch } from "react-router-dom";
-import Dashboard from "../dashboard/Dashboard";
-import NotFound from "./NotFound";
-import { today } from "../utils/date-time";
+import { Redirect, Route, Switch } from 'react-router-dom';
+import Dashboard from '../dashboard/Dashboard';
+import NotFound from './NotFound';
+import { today } from '../utils/date-time';
+
+import EditAddReservation from '../dashboard/reservations/EditAddReservation';
 
 /**
  * Defines all the routes for the application.
@@ -12,16 +14,28 @@ import { today } from "../utils/date-time";
  *
  * @returns {JSX.Element}
  */
-function Routes() {
+function Routes () {
   return (
     <Switch>
-      <Route exact={true} path="/">
-        <Redirect to={"/dashboard"} />
+      <Route exact={true} path='/'>
+        <Redirect to={'/dashboard'} />
       </Route>
-      <Route exact={true} path="/reservations">
-        <Redirect to={"/dashboard"} />
+      <Route exact={true} path='/reservations/edit'>
+        <EditAddReservation
+          isCalledAPI={isCalledAPI}
+          setIsCalledAPI={setIsCalledAPI}
+        />
       </Route>
-      <Route path="/dashboard">
+      <Route exact={true} path='/reservations/new'>
+        <EditAddReservation
+          isCalledAPI={isCalledAPI}
+          setIsCalledAPI={setIsCalledAPI}
+        />
+      </Route>
+      <Route exact={true} path='/reservations'>
+        <Redirect to={'/dashboard'} />
+      </Route>
+      <Route path='/dashboard'>
         <Dashboard date={today()} />
       </Route>
       <Route>
