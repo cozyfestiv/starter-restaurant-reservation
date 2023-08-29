@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Redirect, Route, Switch } from 'react-router-dom';
 import Dashboard from '../dashboard/Dashboard';
@@ -15,6 +15,8 @@ import EditAddReservation from '../dashboard/reservations/EditAddReservation';
  * @returns {JSX.Element}
  */
 function Routes () {
+  const [isCalledAPI, setIsCalledAPI] = useState(false);
+
   return (
     <Switch>
       <Route exact={true} path='/'>

@@ -1,5 +1,17 @@
+import React, { useState, useEffect } from 'react';
+import { useHistory, useRouteMatch } from 'react-router-dom';
+import {
+  createReservation,
+  readReservation,
+  updateReservationDetails
+} from '../../utils/api';
+
 export default function AddEditReservation ({ calledAPI, setCalledAPI }) {
+  const history = useHistory();
   const [formData, setFormData] = useState({});
+  const {
+    params: { reservation_id }
+  } = useRouteMatch();
 
   function handleChange ({ target }) {
     setFormData(() => ({ ...formData, [target.name]: target.value }));
@@ -7,26 +19,16 @@ export default function AddEditReservation ({ calledAPI, setCalledAPI }) {
 
   async function handleSubmit (event) {
     event.preventDefault();
-    setErrors(null);
-    const errorsArr = getDateErrors();
-
-    if (!errorsArr.length) {
-      try {
-        if (reservation_id) {
-          await updateReservationDetails(formData, reservation_id);
-        } else {
-          await createReservation(formData);
-        }
-
-        setCalledAPI(!calledAPI);
-        history.push(`/dashboard?date=${formData.reservation_date}`);
-      } catch (error) {
-        setErrors(error);
+    try {
+      if (reservation_id) {
+        await updateReservationDetails(formData, reservation_id);
+      } else {
+        await createReservation(formData);
       }
-    } else {
-      const errorMessage = { message: `${errorsArr.join(', ').trim()}` };
-      setErrors(errorMessage);
-    }
+
+      setCalledAPI(!calledAPI);
+      history.push(`/dashboard?date=${formData.reservation_date}`);
+    } catch (error) {}
   }
 
   return (
@@ -63,7 +65,7 @@ export default function AddEditReservation ({ calledAPI, setCalledAPI }) {
             required
             type='tel'
             name='mobile_number'
-            value={FormData.mobile_number}
+            value={formData.mobile_number}
             className='form-control'
             placeholder='123-456-7890'
             onChange={handleChange}
