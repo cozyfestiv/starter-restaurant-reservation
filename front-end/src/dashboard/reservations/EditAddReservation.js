@@ -8,6 +8,7 @@ import {
 
 export default function AddEditReservation ({ calledAPI, setCalledAPI }) {
   const history = useHistory();
+  const { reservation, setReservation } = useState({});
   const [formData, setFormData] = useState({});
   const {
     params: { reservation_id }
@@ -17,6 +18,7 @@ export default function AddEditReservation ({ calledAPI, setCalledAPI }) {
     setFormData(() => ({ ...formData, [target.name]: target.value }));
   }
 
+  //wrote the handleSubmit but I need to set the formData first
   async function handleSubmit (event) {
     event.preventDefault();
     try {
@@ -29,6 +31,57 @@ export default function AddEditReservation ({ calledAPI, setCalledAPI }) {
       setCalledAPI(!calledAPI);
       history.push(`/dashboard?date=${formData.reservation_date}`);
     } catch (error) {}
+  }
+
+  useEffect(loadReservation, []);
+  async function loadReservation () {
+    try {
+      if (reservation_id) {
+        const response = await readReservation(reservation_id);
+
+        let {
+          first_name,
+          last_name,
+          mobile_number,
+          reservation_date,
+          reservation_time,
+          people
+        } = response;
+        //modify reservation date to only include the date part
+        reservation_date = reservation_date.slice(0, 10);
+        //update reservation state with fetched details
+        setReservation(() => ({
+          ...reservation_date,
+          first_name,
+          last_name,
+          mobile_number,
+          reservation_date,
+          reservation_time,
+          people
+        }));
+        //update formData state with fetched details
+        setFormData(() => ({
+          ...formData,
+          first_name,
+          last_name,
+          mobile_number,
+          reservation_date,
+          reservation_time,
+          people
+        }));
+      } else {
+        setReservation({
+          first_name: '',
+          last_name: '',
+          mobile_number: '',
+          reservation_date: '',
+          reservation_time: '',
+          people: ''
+        });
+      }
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   return (

@@ -15,24 +15,18 @@ import EditAddReservation from '../dashboard/reservations/EditAddReservation';
  * @returns {JSX.Element}
  */
 function Routes () {
-  const [isCalledAPI, setIsCalledAPI] = useState(false);
+  const [calledAPI, setCalledAPI] = useState(false);
 
   return (
     <Switch>
       <Route exact={true} path='/'>
         <Redirect to={'/dashboard'} />
       </Route>
-      <Route exact={true} path='/reservations/edit'>
-        <EditAddReservation
-          isCalledAPI={isCalledAPI}
-          setIsCalledAPI={setIsCalledAPI}
-        />
+      <Route exact={true} path='/reservations/:reservation_id/edit'>
+        <EditAddReservation calledAPI={calledAPI} setCalledAPI={setCalledAPI} />
       </Route>
       <Route exact={true} path='/reservations/new'>
-        <EditAddReservation
-          isCalledAPI={isCalledAPI}
-          setIsCalledAPI={setIsCalledAPI}
-        />
+        <EditAddReservation calledAPI={calledAPI} setCalledAPI={setCalledAPI} />
       </Route>
       <Route exact={true} path='/reservations'>
         <Redirect to={'/dashboard'} />
