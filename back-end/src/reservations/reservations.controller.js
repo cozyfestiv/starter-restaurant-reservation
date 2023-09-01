@@ -153,5 +153,14 @@ module.exports = {
     peopleIsNumber,
     hasValidDateTime,
     asyncErrorBoundary(create)
+  ],
+  list: asyncErrorBoundary(list),
+  read: [asyncErrorBoundary(reservationExists), read],
+  create: [
+    hasOnlyValidProperties,
+    hasRequiredProperties,
+    peopleIsNumber,
+    hasValidDateTime,
+    asyncErrorBoundary(create)
   ]
 };
