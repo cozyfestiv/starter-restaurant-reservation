@@ -28,16 +28,93 @@ async function reservationExists (req, res, next) {
   });
 }
 
+function hasOnlyValidProperties (req, res, next) {
+  const { data = {} } = req.body;
+  res.locals.reservation = req.body.data;
+
+  const invalidFields = Object.keys(data).filter(field => {
+    !VALID_PROPERTIES.includes(field);
+  });
+  if (invalidFields.length)
+    return next({
+      status: 400,
+      message: `Invalid field(s): ${invalidFields.join(',')}`
+    });
+  next();
+}
+
+const hasRequiredProperties = hasProperties(
+  'first_name',
+  'last_name',
+  'mobile_number',
+  'reservation_date',
+  'reservation_time',
+  'people'
+);
+
+const hasRequiredUpdateProperties = hasProperties('status');
+
+function peopleIsNumber (req, res, next) {
+  const { people } = req.body.data;
+  if (!Number.isInteger(people) || people <= 0) {
+    return next({
+      status: 400,
+      message: 'The number of people must be at least 1.'
+    });
+  }
+  next();
+}
+
+function hasValidDateTime (req, res, next) {
+  const { reservation_date, reservation_time } = req.body.data;
+  let today = new Date();
+  let resDateTime = reservation_date + ' ' + reservation_time;
+  let reservationAsDate = new Date(resDateTime);
+
+  const timeReg = /^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
+
+  if (reservation_time.match(timeReg) === null) {
+    return next({
+      status: 400,
+      message: `reservation_time, ${reservation_time}, is not a valid time.`
+    });
+  }
+  if (reservation_time < '10:30' || reservation_time > '21:30') {
+    return next({
+      status: 400,
+      message: 'Reservations must be made between 10:30am and 9:30pm.'
+    });
+  }
+  if (isNaN(reservationAsDate.getDate())) {
+    return next({
+      status: 400,
+      message: 'reservation_date is not a valid date.'
+    });
+  }
+  if (reservationAsDate < today) {
+    return next({
+      status: 400,
+      message: 'Reservation date must be in the future.'
+    });
+  }
+  if (reservationAsDate && reservationAsDate.getDay() === 2) {
+    return next({
+      status: 400,
+      message: 'Restaurant is closed on Tuesdays '
+    });
+  }
+  next();
+}
+
 async function list (req, res) {
   const { date, mobile_number } = req.query;
+
   if (date) {
-    res.json({
-      data: await service.listByDate(date)
-    });
+    res.json({ data: await service.listByDate(date) });
   } else if (mobile_number) {
     res.json({ data: await service.search(mobile_number) });
   } else {
-    res.json({ data: await service.list });
+    res.json({ data: await service.list() });
   }
 }
 
@@ -56,7 +133,13 @@ async function create (req, res) {
 //MIDDLEWARE
 
 module.exports = {
-  list,
-  read: [reservationExists, read],
-  create: asyncErrorBoundary(create)
+  list: asyncErrorBoundary(list),
+  read: [asyncErrorBoundary(reservationExists), read],
+  create: [
+    hasOnlyValidProperties,
+    hasRequiredProperties,
+    peopleIsNumber,
+    hasValidDateTime,
+    asyncErrorBoundary(create)
+  ]
 };
