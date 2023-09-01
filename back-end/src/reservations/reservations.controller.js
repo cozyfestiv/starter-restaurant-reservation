@@ -2,6 +2,32 @@ const service = require('./reservations.service');
 const hasProperties = require('../errors/hasProperties');
 const asyncErrorBoundary = require('../errors/asyncErrorBoundary');
 
+async function list (req, res) {
+  const { date, mobile_number } = req.query;
+
+  if (date) {
+    res.json({ data: await service.listByDate(date) });
+  } else if (mobile_number) {
+    res.json({ data: await service.search(mobile_number) });
+  } else {
+    res.json({ data: await service.list() });
+  }
+}
+
+function read (req, res) {
+  const { reservation } = res.locals;
+  res.json({ data: reservation });
+}
+
+async function create (req, res) {
+  const newReservation = await service.create(req.body.data);
+  res.status(201).json({
+    data: newReservation[0]
+  });
+}
+
+//MIDDLEWARE
+
 const VALID_PROPERTIES = [
   'first_name',
   'last_name',
@@ -106,31 +132,17 @@ function hasValidDateTime (req, res, next) {
   next();
 }
 
-async function list (req, res) {
-  const { date, mobile_number } = req.query;
-
-  if (date) {
-    res.json({ data: await service.listByDate(date) });
-  } else if (mobile_number) {
-    res.json({ data: await service.search(mobile_number) });
-  } else {
-    res.json({ data: await service.list() });
+function hasValidStatus (req, res, next) {
+  const { status } = req.body.data;
+  const validStatus = ['booked', 'seated', 'finished', 'cancelled'];
+  if (!validStatus.includes(status)) {
+    return next({
+      status: 400,
+      message: `Status ${status} is not valid.`
+    });
   }
+  next();
 }
-
-function read (req, res) {
-  const { reservation } = res.locals;
-  res.json({ data: reservation });
-}
-
-async function create (req, res) {
-  const newReservation = await service.create(req.body.data);
-  res.status(201).json({
-    data: newReservation[0]
-  });
-}
-
-//MIDDLEWARE
 
 module.exports = {
   list: asyncErrorBoundary(list),
