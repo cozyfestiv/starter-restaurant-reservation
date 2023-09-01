@@ -11,7 +11,7 @@ const methodNotAllowed = require('../errors/methodNotAllowed');
 router
   .route('/')
   .get(controller.list)
-  .post(contoller.create)
+  .post(controller.create)
   .all(methodNotAllowed);
 
 router.route('/new').all(methodNotAllowed);
