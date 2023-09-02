@@ -3,12 +3,10 @@ const hasProperties = require('../errors/hasProperties');
 const asyncErrorBoundary = require('../errors/asyncErrorBoundary');
 
 async function list (req, res) {
-  const { date, mobile_number } = req.query;
+  const { date } = req.query;
 
   if (date) {
     res.json({ data: await service.listByDate(date) });
-  } else if (mobile_number) {
-    res.json({ data: await service.search(mobile_number) });
   } else {
     res.json({ data: await service.list() });
   }
@@ -78,8 +76,6 @@ const hasRequiredProperties = hasProperties(
   'people'
 );
 
-const hasRequiredUpdateProperties = hasProperties('status');
-
 function peopleIsNumber (req, res, next) {
   const { people } = req.body.data;
   if (!Number.isInteger(people) || people <= 0) {
@@ -127,18 +123,6 @@ function hasValidDateTime (req, res, next) {
     return next({
       status: 400,
       message: 'Restaurant is closed on Tuesdays '
-    });
-  }
-  next();
-}
-
-function hasValidStatus (req, res, next) {
-  const { status } = req.body.data;
-  const validStatus = ['booked', 'seated', 'finished', 'cancelled'];
-  if (!validStatus.includes(status)) {
-    return next({
-      status: 400,
-      message: `Status ${status} is not valid.`
     });
   }
   next();
