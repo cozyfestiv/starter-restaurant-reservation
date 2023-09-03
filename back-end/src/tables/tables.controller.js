@@ -15,6 +15,17 @@ async function create (req, res) {
   });
 }
 
+async function update (req, res, next) {
+  const { table_id } = req.params;
+  const { reservation_id } = req.body.data;
+  const updatedTable = {
+    reservation_id: reservation_id,
+    table_id: table_id
+  };
+  const data = await service.update(updatedTable);
+  res.json({ data });
+}
+
 const VALID_PROPERTIES = ['table_name', 'capacity', 'reservation_id'];
 
 function hasOnlyValidProperties (req, res, next) {
@@ -44,8 +55,8 @@ function validTableName (req, res, next) {
 }
 
 function validCapacity (req, res, next) {
-  const { capacity } = res.locals.table;
   const { people } = res.locals.reservation;
+  const { capacity } = res.locals.table;
   if (capacity < people) {
     return next({
       status: 400,
@@ -69,6 +80,34 @@ function capacityIsNumber (req, res, next) {
   }
 }
 
+async function tableExists (req, res, next) {
+  const { table_id } = req.params;
+  const table = await service.read(table_id);
+  if (table) {
+    res.locals.table = table;
+    return next();
+  }
+  return next({
+    status: 404,
+    message: `table_id ${table_id} does not exist.`
+  });
+}
+
+async function reservationExists (req, res, next) {
+  const { reservation_id } = req.body.data;
+  const reservation = await read(reservation_id);
+  if (reservation) {
+    res.locals.reservation = reservation;
+    return next();
+  }
+  return next({
+    status: 404,
+    message: `reservation_id ${reservation_id} not found.`
+  });
+}
+
+const hasRequiredUpdateProperties = hasProperties('reservation_id');
+
 module.exports = {
   list: asyncErrorBoundary(list),
   create: [
@@ -77,5 +116,13 @@ module.exports = {
     validTableName,
     capacityIsNumber,
     asyncErrorBoundary(create)
+  ],
+  update: [
+    hasOnlyValidProperties,
+    hasRequiredUpdateProperties,
+    asyncErrorBoundary(tableExists),
+    asyncErrorBoundary(reservationExists),
+    validCapacity,
+    asyncErrorBoundary(update)
   ]
 };

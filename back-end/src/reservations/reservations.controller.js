@@ -12,7 +12,7 @@ async function list (req, res) {
   }
 }
 
-function read (req, res) {
+function read (req, res, next) {
   const { reservation } = res.locals;
   res.json({ data: reservation });
 }

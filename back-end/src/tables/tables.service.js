@@ -8,7 +8,20 @@ function create (newTable) {
   return knex('tables').insert(newTable).returning('*');
 }
 
+function update (updatedTable) {
+  return knex('tables')
+    .select('*')
+    .where({ table_id: updatedTable.table_id })
+    .update(updatedTable, '*');
+}
+
+function read (table_id) {
+  return knex('tables').select('*').where({ table_id: table_id }).first();
+}
+
 module.exports = {
   list,
-  create
+  create,
+  update,
+  read
 };
