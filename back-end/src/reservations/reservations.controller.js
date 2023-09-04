@@ -12,9 +12,9 @@ async function list (req, res) {
   }
 }
 
-function read (req, res, next) {
-  const { reservation } = res.locals;
-  res.json({ data: reservation });
+function read (req, res) {
+  const data = res.locals.reservation;
+  res.json({ data });
 }
 
 async function create (req, res) {
@@ -129,15 +129,6 @@ function hasValidDateTime (req, res, next) {
 }
 
 module.exports = {
-  list: asyncErrorBoundary(list),
-  read: [asyncErrorBoundary(reservationExists), read],
-  create: [
-    hasOnlyValidProperties,
-    hasRequiredProperties,
-    peopleIsNumber,
-    hasValidDateTime,
-    asyncErrorBoundary(create)
-  ],
   list: asyncErrorBoundary(list),
   read: [asyncErrorBoundary(reservationExists), read],
   create: [

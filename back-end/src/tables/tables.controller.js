@@ -26,6 +26,14 @@ async function update (req, res, next) {
   res.json({ data });
 }
 
+async function finish (req, res) {
+  const { table_id } = req.params;
+  const { reservation_id } = res.locals.table;
+  const reservation = await service.finish(table_id, reservation_id);
+
+  res.json({ data: reservation });
+}
+
 const VALID_PROPERTIES = ['table_name', 'capacity', 'reservation_id'];
 
 function hasOnlyValidProperties (req, res, next) {
@@ -108,6 +116,17 @@ async function reservationExists (req, res, next) {
 
 const hasRequiredUpdateProperties = hasProperties('reservation_id');
 
+function tableIsOccupied (req, res, next) {
+  const { reservation_id } = res.locals.table;
+  if (!reservation_id) {
+    return next({
+      status: 400,
+      message: 'Table is not occupied.'
+    });
+  }
+  next();
+}
+
 module.exports = {
   list: asyncErrorBoundary(list),
   create: [
@@ -124,5 +143,10 @@ module.exports = {
     asyncErrorBoundary(reservationExists),
     validCapacity,
     asyncErrorBoundary(update)
+  ],
+  finish: [
+    asyncErrorBoundary(tableExists),
+    tableIsOccupied,
+    asyncErrorBoundary(finish)
   ]
 };
