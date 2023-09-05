@@ -4,7 +4,6 @@ const asyncErrorBoundary = require('../errors/asyncErrorBoundary');
 
 async function list (req, res) {
   const { date } = req.query;
-
   if (date) {
     res.json({ data: await service.listByDate(date) });
   } else {
@@ -40,8 +39,10 @@ const VALID_PROPERTIES = [
 ];
 
 async function reservationExists (req, res, next) {
+  // console.log(req.params, '----------------------------');
   const { reservation_id } = req.params;
   const reservation = await service.read(reservation_id);
+  console.log(reservation, '----------------------------');
   if (reservation) {
     res.locals.reservation = reservation;
     return next();
@@ -75,6 +76,8 @@ const hasRequiredProperties = hasProperties(
   'reservation_time',
   'people'
 );
+
+const hasRequiredUpdateProperties = hasProperties('status');
 
 function peopleIsNumber (req, res, next) {
   const { people } = req.body.data;
