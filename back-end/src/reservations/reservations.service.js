@@ -28,6 +28,5 @@ module.exports = {
   list,
   listByDate,
   create,
-  read,
-  search
+  read
 };
