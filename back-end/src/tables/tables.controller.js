@@ -116,6 +116,17 @@ async function reservationExists (req, res, next) {
 
 const hasRequiredUpdateProperties = hasProperties('reservation_id');
 
+function tableIsFree (req, res, next) {
+  const { reservation_id } = res.locals.table;
+  if (reservation_id) {
+    return next({
+      status: 400,
+      message: 'Table is occupied.'
+    });
+  }
+  next();
+}
+
 function tableIsOccupied (req, res, next) {
   const { reservation_id } = res.locals.table;
   if (!reservation_id) {
@@ -142,6 +153,7 @@ module.exports = {
     asyncErrorBoundary(tableExists),
     asyncErrorBoundary(reservationExists),
     validCapacity,
+    tableIsFree,
     asyncErrorBoundary(update)
   ],
   finish: [

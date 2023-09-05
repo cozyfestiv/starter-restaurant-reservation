@@ -41,5 +41,6 @@ module.exports = {
   list,
   create,
   update,
-  read
+  read,
+  finish
 };
