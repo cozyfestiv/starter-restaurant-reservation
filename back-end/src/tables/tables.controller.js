@@ -34,6 +34,8 @@ async function finish (req, res) {
   res.json({ data: reservation });
 }
 
+//MIDDLEWARE
+
 const VALID_PROPERTIES = ['table_name', 'capacity', 'reservation_id'];
 
 function hasOnlyValidProperties (req, res, next) {
@@ -121,7 +123,7 @@ function tableIsFree (req, res, next) {
   if (reservation_id) {
     return next({
       status: 400,
-      message: 'Table is occupied.'
+      message: 'A reservation is already seated.'
     });
   }
   next();

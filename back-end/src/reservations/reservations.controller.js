@@ -155,7 +155,7 @@ function statusIsBooked (req, res, next) {
 }
 
 function statusNotFinished (req, res, next) {
-  const { status } = req.body.data;
+  const { status } = res.locals.reservation;
   if (status === 'finished') {
     next({
       status: 400,

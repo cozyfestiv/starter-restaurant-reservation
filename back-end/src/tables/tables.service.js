@@ -8,11 +8,21 @@ function create (newTable) {
   return knex('tables').insert(newTable).returning('*');
 }
 
-function update (updatedTable) {
-  return knex('tables')
-    .select('*')
-    .where({ table_id: updatedTable.table_id })
-    .update(updatedTable, '*');
+function update ({ table_id, reservation_id }) {
+  return knex.transaction(trx => {
+    return knex('reservations')
+      .transacting(trx)
+      .where({ reservation_id: reservation_id })
+      .update({ status: 'seated' })
+      .then(() => {
+        return knex('tables')
+          .where({ table_id: table_id })
+          .update({ reservation_id: reservation_id })
+          .returning('*');
+      })
+      .then(trx.commit)
+      .catch(trx.rollback);
+  });
 }
 
 function read (table_id) {
