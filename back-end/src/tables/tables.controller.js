@@ -93,6 +93,7 @@ function capacityIsNumber (req, res, next) {
 async function tableExists (req, res, next) {
   const { table_id } = req.params;
   const table = await service.read(table_id);
+  // console.log(table, '%%%%%%%%%');
   if (table) {
     res.locals.table = table;
     return next();
@@ -119,8 +120,9 @@ async function reservationExists (req, res, next) {
 const hasRequiredUpdateProperties = hasProperties('reservation_id');
 
 function tableIsFree (req, res, next) {
-  const { reservation_id } = res.locals.table;
-  if (reservation_id) {
+  const { status } = res.locals.table;
+  console.log(status, '&&&&&&&&&&&&&&&&&&&&&&&&&&&');
+  if (status === 'seated') {
     return next({
       status: 400,
       message: 'A reservation is already seated.'
