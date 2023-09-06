@@ -3,9 +3,11 @@ const hasProperties = require('../errors/hasProperties');
 const asyncErrorBoundary = require('../errors/asyncErrorBoundary');
 
 async function list (req, res) {
-  const { date } = req.query;
+  const { date, mobile_number } = req.query;
   if (date) {
     res.json({ data: await service.listByDate(date) });
+  } else if (mobile_number) {
+    res.json({ data: await service.search(mobile_number) });
   } else {
     res.json({ data: await service.list() });
   }
