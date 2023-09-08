@@ -9,7 +9,14 @@ import {
 export default function AddEditReservation ({ calledAPI, setCalledAPI }) {
   const history = useHistory();
   const { reservation, setReservation } = useState({});
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({
+    first_name: '',
+    last_name: '',
+    mobile_number: '',
+    reservation_date: '',
+    reservation_time: '',
+    people: ''
+  });
   const {
     params: { reservation_id }
   } = useRouteMatch();
@@ -27,62 +34,65 @@ export default function AddEditReservation ({ calledAPI, setCalledAPI }) {
       } else {
         await createReservation(formData);
       }
-
+      //this is the API call which connects to the backend
       setCalledAPI(!calledAPI);
       history.push(`/dashboard?date=${formData.reservation_date}`);
     } catch (error) {}
   }
 
-  useEffect(loadReservation, []);
-  async function loadReservation () {
-    try {
-      if (reservation_id) {
-        const response = await readReservation(reservation_id);
+  useEffect(() => {
+    async function loadReservation () {
+      try {
+        if (reservation_id) {
+          const response = await readReservation(reservation_id);
 
-        let {
-          first_name,
-          last_name,
-          mobile_number,
-          reservation_date,
-          reservation_time,
-          people
-        } = response;
-        //modify reservation date to only include the date part
-        reservation_date = reservation_date.slice(0, 10);
-        //update reservation state with fetched details
-        setReservation(() => ({
-          ...reservation_date,
-          first_name,
-          last_name,
-          mobile_number,
-          reservation_date,
-          reservation_time,
-          people
-        }));
-        //update formData state with fetched details
-        setFormData(() => ({
-          ...formData,
-          first_name,
-          last_name,
-          mobile_number,
-          reservation_date,
-          reservation_time,
-          people
-        }));
-      } else {
-        setReservation({
-          first_name: '',
-          last_name: '',
-          mobile_number: '',
-          reservation_date: '',
-          reservation_time: '',
-          people: ''
-        });
+          let {
+            first_name,
+            last_name,
+            mobile_number,
+            reservation_date,
+            reservation_time,
+            people
+          } = response;
+          //modify reservation date to only include the date part
+          reservation_date = reservation_date.slice(0, 10);
+          //update reservation state with fetched details
+          setReservation(() => ({
+            ...reservation_date,
+            first_name,
+            last_name,
+            mobile_number,
+            reservation_date,
+            reservation_time,
+            people
+          }));
+          //update formData state with fetched details
+          setFormData(() => ({
+            ...formData,
+            first_name,
+            last_name,
+            mobile_number,
+            reservation_date,
+            reservation_time,
+            people
+          }));
+        } else {
+          setReservation({
+            first_name: '',
+            last_name: '',
+            mobile_number: '',
+            reservation_date: '',
+            reservation_time: '',
+            people: ''
+          });
+        }
+      } catch (error) {
+        console.error(error);
       }
-    } catch (error) {
-      console.error(error);
     }
-  }
+    loadReservation();
+  }, [formData, reservation_id, setReservation]);
+  //anything that comes from outside of the useEffect needs to be passed in as a dependendency
 
   return (
     <div>

@@ -73,6 +73,7 @@ export async function readReservation (id, signal) {
   return await fetchJson(url, { headers, signal }, []);
 }
 
+//make sure to send ABORT CONTROLLERS, stopping API requests quickly (in tests )
 export async function createReservation (reservation, signal) {
   const url = `${API_BASE_URL}/reservations`;
   reservation.people = +reservation.people;
