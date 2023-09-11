@@ -4,7 +4,7 @@ import {
   createReservation,
   readReservation,
   updateReservationDetails
-} from '../../utils/api';
+} from '../utils/api';
 
 export default function AddEditReservation ({ calledAPI, setCalledAPI }) {
   const history = useHistory();

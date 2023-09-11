@@ -96,7 +96,7 @@ export async function updateReservationDetails (
   reservation_id,
   signal
 ) {
-  //construct the URL for the API endpoint
+  //construct the URL
   const url = `${API_BASE_URL}/reservations/${reservation_id}`;
   //Perform an async operation using fetchJson
   //send a PUT request to update the reservation details
@@ -110,4 +110,20 @@ export async function updateReservationDetails (
     },
     []
   );
+}
+
+export async function updateReservationStatus (
+  reservation_id,
+  newStatus,
+  signal
+) {
+  //construct the URL
+  const url = `${API_BASE_URL}/reservations/${reservation_id}/status`;
+
+  return await fetchJson(url, {
+    method: 'PUT',
+    headers,
+    body: JSON.stringify({ data: { status: newStatus } }),
+    signal
+  });
 }
