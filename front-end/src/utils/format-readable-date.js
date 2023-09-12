@@ -4,9 +4,9 @@ function formatReadableDate (date) {
   return dateObj.toLocaleDateString('en-us', {
     timeZone: 'UTC',
     weekday: 'short',
-    year: 'numberic',
+    year: 'numeric',
     month: 'long',
-    day: 'numberic'
+    day: 'numeric'
   });
 }
 

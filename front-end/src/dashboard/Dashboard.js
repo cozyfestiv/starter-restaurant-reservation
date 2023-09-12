@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { listReservations } from '../utils/api';
-import ErrorAlert from '../layout/ErrorAlert';
-import ReservationList from '../reservations/ReservationList';
+import React, { useState, useEffect } from 'react';
 import useQuery from '../utils/useQuery';
 import formatReadableDate from '../utils/format-readable-date';
+import ErrorAlert from '../layout/ErrorAlert';
+import DashboardDateNavigation from './DashboardDateNavigation';
+import ReservationList from '../reservations/ReservationList';
+// import TableList from '../tables/TableList';
+import { listReservations } from '../utils/api';
 
 /**
  * Defines the dashboard page.
@@ -14,12 +16,14 @@ import formatReadableDate from '../utils/format-readable-date';
 function Dashboard ({ date }) {
   const [reservations, setReservations] = useState([]);
   const [reservationsError, setReservationsError] = useState(null);
+  // const [tables, setTables] = useState([]);
 
   const dateQuery = useQuery().get('date');
 
   if (dateQuery && dateQuery !== '') {
     date = dateQuery;
   }
+  console.log(date);
 
   useEffect(loadDashboard, [date]);
 
@@ -29,6 +33,7 @@ function Dashboard ({ date }) {
     listReservations({ date }, abortController.signal)
       .then(setReservations)
       .catch(setReservationsError);
+
     return () => abortController.abort();
   }
 
@@ -36,13 +41,20 @@ function Dashboard ({ date }) {
 
   return (
     <main>
-      <h1>Dashboard</h1>
-      <div className='d-md-flex mb-3'>
-        <h4 className='mb-0'>Reservations for {reservationDate} </h4>
-        <ReservationList reservations={reservations} />
-      </div>
+      <h2>Dashboard</h2>
       <ErrorAlert error={reservationsError} />
-      {JSON.stringify(reservations)}
+      <div>
+        <span>
+          <DashboardDateNavigation date={date} />
+        </span>
+
+        <div>
+          <div>
+            <h3>Reservations for {reservationDate}</h3>
+            <ReservationList reservations={reservations} />
+          </div>
+        </div>
+      </div>
     </main>
   );
 }

@@ -76,19 +76,13 @@ export async function readReservation (id, signal) {
 //make sure to send ABORT CONTROLLERS, stopping API requests quickly (in tests )
 export async function createReservation (reservation, signal) {
   const url = `${API_BASE_URL}/reservations`;
-  reservation.people = +reservation.people;
-  return await fetchJson(
-    url,
-    {
-      body: JSON.stringify({ data: reservation }),
-      headers,
-      method: 'POST',
-      signal
-    },
-    []
-  )
-    .then(formatReservationDate)
-    .then(formatReservationTime);
+  const options = {
+    method: 'POST',
+    headers,
+    body: JSON.stringify({ data: reservation }),
+    signal
+  };
+  return await fetchJson(url, options, {});
 }
 
 export async function updateReservationDetails (
@@ -110,6 +104,17 @@ export async function updateReservationDetails (
     },
     []
   );
+}
+
+export async function updateReservation (updatedReservation, signal) {
+  const url = `${API_BASE_URL}/reservations/${updatedReservation.reservation_id}`;
+  const options = {
+    method: 'PUT',
+    headers,
+    body: JSON.stringify({ data: updatedReservation }),
+    signal
+  };
+  return await fetchJson(url, options, []);
 }
 
 export async function updateReservationStatus (

@@ -12,10 +12,10 @@ const timeFormat = /\d\d:\d\d/;
  * @returns {string}
  *  the specified Date formatted as YYYY-MM-DD
  */
-function asDateString(date) {
+function asDateString (date) {
   return `${date.getFullYear().toString(10)}-${(date.getMonth() + 1)
     .toString(10)
-    .padStart(2, "0")}-${date.getDate().toString(10).padStart(2, "0")}`;
+    .padStart(2, '0')}-${date.getDate().toString(10).padStart(2, '0')}`;
 }
 
 /**
@@ -25,7 +25,7 @@ function asDateString(date) {
  * @returns {*}
  *  the specified date string formatted as YYYY-MM-DD
  */
-export function formatAsDate(dateString) {
+export function formatAsDate (dateString) {
   return dateString.match(dateFormat)[0];
 }
 
@@ -36,7 +36,7 @@ export function formatAsDate(dateString) {
  * @returns {*}
  *  the specified time string formatted as YHH:MM.
  */
-export function formatAsTime(timeString) {
+export function formatAsTime (timeString) {
   return timeString.match(timeFormat)[0];
 }
 
@@ -45,7 +45,7 @@ export function formatAsTime(timeString) {
  * @returns {*}
  *  the today's date formatted as YYYY-MM-DD
  */
-export function today() {
+export function today () {
   return asDateString(new Date());
 }
 
@@ -56,8 +56,8 @@ export function today() {
  * @returns {*}
  *  the date one day prior to currentDate, formatted as YYYY-MM-DD
  */
-export function previous(currentDate) {
-  let [ year, month, day ] = currentDate.split("-");
+export function previous (currentDate) {
+  let [year, month, day] = currentDate.split('-');
   month -= 1;
   const date = new Date(year, month, day);
   date.setMonth(date.getMonth());
@@ -72,11 +72,32 @@ export function previous(currentDate) {
  * @returns {*}
  *  the date one day after currentDate, formatted as YYYY-MM-DD
  */
-export function next(currentDate) {
-  let [ year, month, day ] = currentDate.split("-");
+export function next (currentDate) {
+  let [year, month, day] = currentDate.split('-');
   month -= 1;
   const date = new Date(year, month, day);
   date.setMonth(date.getMonth());
   date.setDate(date.getDate() + 1);
   return asDateString(date);
+}
+
+//converts reservation_time from a 24-hour format to a 12-hour format with AM or PM
+export function getTimeFormat (reservation_time) {
+  const timeString = reservation_time.toString();
+  const newTime = formatAsTime(timeString);
+  const time = newTime.split(':');
+  const hours = Number(time[0]);
+  const minutes = Number(time[1]);
+  let timeValue = null;
+
+  if (hours > 0 && hours <= 12) {
+    timeValue = '' + hours;
+  } else if (hours > 12) {
+    timeValue = '' + (hours - 12);
+  } else if (hours === 0) {
+    timeValue = '12';
+  }
+  timeValue += minutes < 10 ? ':0' + minutes : ':' + minutes;
+  timeValue += hours >= 12 ? 'P.M.' : 'A.M.';
+  return timeValue;
 }

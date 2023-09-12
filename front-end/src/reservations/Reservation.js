@@ -4,7 +4,6 @@ import { getTimeFormat } from '../utils/date-time';
 import formatPhoneNumber from '../utils/format-phone-number.js';
 import { updateReservationStatus } from '../utils/api';
 import ErrorAlert from '../layout/ErrorAlert';
-import { updateReservationDetails } from '../utils/api';
 
 function Reservation ({ reservation }) {
   const {
@@ -71,6 +70,7 @@ function Reservation ({ reservation }) {
         >
           Cancel
         </button>
+        <ErrorAlert error={cancelError} />
       </div>
     </div>
   );
