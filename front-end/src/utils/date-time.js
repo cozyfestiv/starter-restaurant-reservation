@@ -81,7 +81,7 @@ export function next (currentDate) {
   return asDateString(date);
 }
 
-//converts reservation_time from a 24-hour format to a 12-hour format with AM or PM
+//converts reservation_time from a 24hour format to a 12-hour format with AM or PM
 export function getTimeFormat (reservation_time) {
   const timeString = reservation_time.toString();
   const newTime = formatAsTime(timeString);
@@ -98,6 +98,6 @@ export function getTimeFormat (reservation_time) {
     timeValue = '12';
   }
   timeValue += minutes < 10 ? ':0' + minutes : ':' + minutes;
-  timeValue += hours >= 12 ? 'P.M.' : 'A.M.';
+  timeValue += hours >= 12 ? ' PM' : ' AM';
   return timeValue;
 }

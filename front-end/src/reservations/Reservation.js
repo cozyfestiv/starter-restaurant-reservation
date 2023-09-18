@@ -57,7 +57,9 @@ function Reservation ({ reservation }) {
           data-reservation-id-status={reservation_id}
         >{`Status: ${status}`}</div>
         {status === 'booked' ? (
-          <Link to={`/reservation/${reservation_id}/seat`}>Seat</Link>
+          <Link to={`/reservations/${reservation_id}/seat`}>
+            <button href={`/reservations/${reservation_id}/edit`}>Seat</button>
+          </Link>
         ) : null}
 
         <Link to={`/reservations/${reservation_id}/edit`}>

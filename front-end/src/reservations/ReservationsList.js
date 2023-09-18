@@ -2,7 +2,7 @@ import NotFound from '../layout/NotFound';
 import Reservation from './Reservation';
 import ErrorAlert from '../layout/ErrorAlert';
 
-function ReservationList ({ reservations, reservationsError }) {
+function ReservationsList ({ reservations, reservationsError }) {
   const filteredReservations = reservations.filter(
     reservation =>
       reservation.status === 'booked' || reservation.status === 'seated'
@@ -29,4 +29,4 @@ function ReservationList ({ reservations, reservationsError }) {
   );
 }
 
-export default ReservationList;
+export default ReservationsList;
