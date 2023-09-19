@@ -63,12 +63,16 @@ function ReservationForm () {
     if (reservation_id) {
       setReservationsError(null);
       updateReservation(form, abortController.signal)
-        .then(() => history.goBack())
+        .then(data => {
+          // console.log({ data }, '@@@@@@@@@@@@@@@@');
+          history.push(`/dashboard?date=${form.reservation_date}`);
+        })
+        // .then(() => history.goBack())
         .catch(setReservationsError);
     }
     return () => abortController.abort();
   };
-  //   console.log(typeof form.reservation_date);
+
   return (
     <>
       {reservation_id ? <h2>Edit Reservation</h2> : <h2>Make a Reservation</h2>}

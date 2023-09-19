@@ -16,6 +16,7 @@ import TableList from '../tables/TableList';
 function Dashboard ({ date }) {
   const [reservations, setReservations] = useState([]);
   const [reservationsError, setReservationsError] = useState(null);
+  const filterResults = true;
 
   const dateQuery = useQuery().get('date');
 
@@ -49,8 +50,8 @@ function Dashboard ({ date }) {
           <div className='item'>
             <h3>Reservations for {reservationDate}</h3>
             <ReservationsList
-              reservationsError={reservationsError}
               reservations={reservations}
+              filterResults={filterResults}
             />
           </div>
           <div className='item'>
