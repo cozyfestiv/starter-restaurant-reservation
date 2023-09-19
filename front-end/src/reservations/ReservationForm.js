@@ -5,7 +5,8 @@ import {
   readReservation,
   updateReservation
 } from '../utils/api';
-import { formatAsTime } from '../utils/date-time';
+import { formatAsTime, formatAsDate } from '../utils/date-time';
+import formatReservationDate from '../utils/format-reservation-date';
 import ErrorAlert from '../layout/ErrorAlert';
 
 function ReservationForm () {
@@ -38,12 +39,17 @@ function ReservationForm () {
     let name = target.name;
 
     if (name === 'people' && typeof value === 'string') {
-      value = +value;
+      value = Number(value);
     }
 
     if (name === 'reservation_time') {
       value = formatAsTime(value);
     }
+
+    if (name === 'reservation_date') {
+      value = formatAsDate(value);
+    }
+
     setForm({
       ...form,
       [name]: value
@@ -61,17 +67,16 @@ function ReservationForm () {
     }
 
     if (reservation_id) {
+      // console.log(reservation_id, '######');
       setReservationsError(null);
       updateReservation(form, abortController.signal)
-        .then(data => {
-          // console.log({ data }, '@@@@@@@@@@@@@@@@');
-          history.push(`/dashboard?date=${form.reservation_date}`);
-        })
-        // .then(() => history.goBack())
+        .then(() => history.goBack())
         .catch(setReservationsError);
     }
     return () => abortController.abort();
   };
+
+  console.log(form.reservation_date, '$$$');
 
   return (
     <>
