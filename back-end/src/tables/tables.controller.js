@@ -120,12 +120,19 @@ async function reservationExists (req, res, next) {
 const hasRequiredUpdateProperties = hasProperties('reservation_id');
 
 function tableIsFree (req, res, next) {
+  const { reservation_id } = res.locals.table;
   const { status } = res.locals.reservation;
-  // console.log(res.locals.table.reservation_id, '&&&&&&&&&&&&&&&&&&&&&&&&&&&');
+  // console.log(res.locals.table, '%%%%%%%%%');
+  if (reservation_id) {
+    return next({
+      status: 400,
+      message: 'This table is occupied.'
+    });
+  }
   if (status === 'seated') {
     return next({
       status: 400,
-      message: 'A reservation is already seated.'
+      message: 'Reservation is already seated.'
     });
   }
   next();

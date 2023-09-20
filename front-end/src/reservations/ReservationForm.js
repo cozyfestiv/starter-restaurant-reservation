@@ -65,6 +65,8 @@ function ReservationForm () {
 
     if (reservation_id) {
       setReservationsError(null);
+      form.reservation_date = formatAsDate(form.reservation_date);
+      form.reservation_time = formatAsTime(form.reservation_time);
       updateReservation(form, abortController.signal)
         .then(updatedRes =>
           history.push(`/dashboard?date=${updatedRes.reservation_date}`)
@@ -155,7 +157,7 @@ function ReservationForm () {
                 name='reservation_time'
                 onChange={handleChange}
                 required={true}
-                value={form.reservation_time}
+                value={form.reservation_time.substring(0, 5)}
               />
             </label>
           </div>
