@@ -140,7 +140,7 @@ function ReservationForm () {
                 name='reservation_date'
                 onChange={handleChange}
                 required={true}
-                value={form.reservation_date}
+                value={form.reservation_date.substring(0, 10)}
               />
             </label>
           </div>
