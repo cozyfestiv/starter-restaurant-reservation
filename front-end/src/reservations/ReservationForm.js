@@ -34,10 +34,7 @@ function ReservationForm () {
     return () => abortController.abort();
   }, [reservation_id]);
 
-  const handleChange = ({ target }) => {
-    let value = target.value;
-    let name = target.name;
-
+  const handleChange = ({ target: { name, value } }) => {
     if (name === 'people' && typeof value === 'string') {
       value = Number(value);
     }
@@ -61,16 +58,17 @@ function ReservationForm () {
     const abortController = new AbortController();
     if (!reservation_id) {
       setReservationsError(null);
-      createReservation(form, abortController.signal)
+      createReservation(form)
         .then(() => history.push(`/dashboard?date=${form.reservation_date}`))
         .catch(setReservationsError);
     }
 
     if (reservation_id) {
-      // console.log(reservation_id, '######');
       setReservationsError(null);
       updateReservation(form, abortController.signal)
-        .then(() => history.goBack())
+        .then(updatedRes =>
+          history.push(`/dashboard?date=${updatedRes.reservation_date}`)
+        )
         .catch(setReservationsError);
     }
     return () => abortController.abort();
