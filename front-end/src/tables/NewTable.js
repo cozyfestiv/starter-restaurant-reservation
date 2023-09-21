@@ -76,12 +76,12 @@ function NewTable () {
           </div>
         </div>
         <span>
-          <button type='submit' className='btn btn-primary'>
+          <button type='submit' className='btn submitBtn font-weight-bolder'>
             Submit
           </button>
           <button
             type='button'
-            className='btn btn-secondary mx-3'
+            className='btn cancelBtn font-weight-bolder mx-3'
             onClick={() => history.goBack()}
           >
             Cancel

@@ -9,14 +9,12 @@ function TableList () {
 
   function loadTables () {
     const abortController = new AbortController();
-    //   setReservationsError(null);
     listTables(abortController.signal).then(setTables);
-    //   .catch(setReservationsError);
     return () => abortController.abort();
   }
 
   const list = tables.map(table => (
-    <div key={table.table_id}>
+    <div className='' key={table.table_id}>
       <Table table={table} />
     </div>
   ));

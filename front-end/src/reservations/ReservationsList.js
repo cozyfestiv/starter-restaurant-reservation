@@ -43,33 +43,31 @@ export const ReservationsList = ({ reservations, filterResults }) => {
         return filterResults && checkStatus(reservation) ? (
           ''
         ) : (
-          <div className='reservation' key={reservation.reservation_id}>
-            <div className='group'>
+          <div className='card cards mb-4' key={reservation.reservation_id}>
+            <div className='card-body'>
               <div className='item-quad'>
                 <div className='group-col no-gap'>
+                  <h4 className='card-title'>
+                    {reservation.first_name} {reservation.last_name}{' '}
+                  </h4>
+                  <p className='card-text'>Party of {reservation.people}</p>
                   <div>
-                    <h4 className='inline'>
-                      {reservation.first_name} {reservation.last_name}{' '}
-                    </h4>
-                    <p className='inline'>Party of {reservation.people}</p>
-                  </div>
-                  <div>
-                    <h5 className='blue inline'>
-                      {getTimeFormat(reservation.reservation_time)}
-                    </h5>
-                    <p className='inline'>
-                      mobile : {reservation.mobile_number}
+                    <p className='card-text'>
+                      Time : {getTimeFormat(reservation.reservation_time)}
+                    </p>
+                    <p className='card-text'>
+                      Phone Number : {reservation.mobile_number}
                     </p>
                     <p
-                      className='inline'
+                      className='card-text mb-3'
                       data-reservation-id-status={reservation.reservation_id}
                     >
-                      <i>{reservation.status}</i>
+                      Status: {reservation.status}
                     </p>
                   </div>
                 </div>
               </div>
-              <div className='item'>
+              <div className='row justify-content-center'>
                 {reservation.status === 'booked' ? (
                   <div className='group-reverse'>
                     <Link
@@ -77,6 +75,7 @@ export const ReservationsList = ({ reservations, filterResults }) => {
                       to={`/reservations/${reservation.reservation_id}/seat`}
                     >
                       <button
+                        className='btn submitBtn font-weight-bolder mr-2'
                         href={`/reservations/${reservation.reservation_id}/seat`}
                       >
                         Seat
@@ -86,13 +85,14 @@ export const ReservationsList = ({ reservations, filterResults }) => {
                       to={`/reservations/${reservation.reservation_id}/edit`}
                     >
                       <button
+                        className='btn editBtn font-weight-bolder mr-2'
                         href={`/reservations/${reservation.reservation_id}/edit`}
                       >
                         Edit
                       </button>
                     </Link>
                     <button
-                      className='item black'
+                      className='btn cancelBtn font-weight-bolder mx-2'
                       type='button'
                       data-reservation-id-cancel={reservation.reservation_id}
                       value={reservation.reservation_id}

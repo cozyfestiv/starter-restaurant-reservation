@@ -6,7 +6,6 @@ import {
   updateReservation
 } from '../utils/api';
 import { formatAsTime, formatAsDate } from '../utils/date-time';
-import formatReservationDate from '../utils/format-reservation-date';
 import ErrorAlert from '../layout/ErrorAlert';
 
 function ReservationForm () {
@@ -178,12 +177,12 @@ function ReservationForm () {
             </label>
           </div>
         </div>
-        <button type='submit' className='btn btn-primary mx-2'>
+        <button type='submit' className='btn submitBtn font-weight-bolder mx-2'>
           Submit
         </button>
         <button
           type='button'
-          className='btn btn-secondary mx-2'
+          className='btn cancelBtn font-weight-bolder mx-2'
           onClick={() => history.goBack()}
         >
           Cancel

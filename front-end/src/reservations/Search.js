@@ -31,9 +31,10 @@ export const Search = () => {
       <h2>Search</h2>
       <div>
         <form onSubmit={submitHandler}>
-          <div>
+          <div className='form-group'>
             <label htmlFor='mobile_number'>Mobile Number:</label>
             <input
+              className='form-control'
               id='mobile_number'
               name='mobile_number'
               type='text'
@@ -44,7 +45,10 @@ export const Search = () => {
               onChange={changeHandler}
             />
           </div>
-          <button type='submit' className='black'>
+          <button
+            type='submit'
+            className='btn submitBtn font-weight-bolder mb-4'
+          >
             Find
           </button>
         </form>

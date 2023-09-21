@@ -1,4 +1,177 @@
+/*---- Header/Nav ----*/
 .side-bar {
-  background-color: #393a44;
+  background-color: #123b6c;
   min-width: 200px;
+  display: flex;
+  justify-content:center;
+  align-items:center;
+  text-align: center;
+  margin: 0;
+}
+
+nav ul{
+  display: flex;
+  justify-content:space-evenly;
+}
+
+nav ul li span{
+  font-size: 15px;
+  padding: 0px 5px 20px 30px;
+  color:white;
+}
+
+.navBtn{
+  background-color: #0671ba;
+  color: white;
+}
+
+.title {
+  font-family: "Verdana", 'Open sans', sans-serif;
+  font-size: 28px;
+  color: #dbe0e1;
+  
+};
+
+/*---- Body -----*/
+body{
+  font-family: "Open Sans", sans-serif;
+  background-color: #dbe0e1;
+}
+
+h2{
+  font-size: 30px;
+  text-align: center;
+  color: #123b6c;
+  width: 100%;
+}
+
+h3{
+  display: flex;
+  font-size: 20px;
+  justify-content: center;
+  text-align: center;
+  background-color: #e05428;
+  color: white;
+  padding: 10px;
+}
+
+h4{
+  display: flex;
+  font-size: 20px;
+  justify-content: center;
+  text-align: center;
+} 
+
+.dateNav {
+  display: flex;
+  justify-content: center;
+}
+
+.prevNext{
+  border-color: #123b6c;
+  color:#123b6c;
+  border-width: 2px;
+  background-color: white;
+}
+
+
+
+/* --- Forms ----*/
+
+.resBtn{
+  margin-left:20%
+}
+
+.formBtn{
+  display: flex;
+  justify-content: flex-start;
+}
+
+.formDivCreate{
+  display:flex;
+  justify-content: space-between;
+  flex-direction:column;
+}
+
+
+form select, form input {
+  margin-bottom: 10px;
+  
+}
+
+
+
+
+/* --- Cards ---*/
+.cards{
+  border-color: #2A5078;
+  border-width: 2px;
+}
+
+.cardStyle {
+  display: flex;
+}
+
+.submitBtn{
+  background-color:#0671ba;
+  color: white;
+}
+
+.editBtn{
+  background-color: #A7b6c8;
+  color: white;
+}
+
+.cancelBtn{
+  background-color: #e05428;
+  color: white;
+}
+
+
+/* -------  Media Query ------- */
+
+@media all and (min-width: 480px) {
+  .heading{
+    font-size: 25px;
+  }
+  
+  .item {
+    flex: 1;
+    margin: 10px;
+  }
+  
+  
+  .side-bar{
+    align-items:flex-start;
+    min-width: 280px;
+    justify-content:center;
+  }
+
+  nav ul{
+    display: flex;
+    justify-content:flex-start;
+  }
+  
+  nav ul li span{
+    font-size: 20px;
+    color:white;
+  }
+  
+  .navBtn{
+    border-color:#123b6c;
+    background-color: #0671ba;
+    color: white;
+  }
+ 
+  .group {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .formDivCreate{
+    display:flex;
+    flex-direction: column;
+    justify-content:space-between;
+  }
+  
 }
