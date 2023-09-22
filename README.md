@@ -7,22 +7,30 @@ This is a full-stack application completed as a captstone project for the Thinkf
 
 A live version of the project can be viewed [here][Live Version] . 
 
-### Applied Technologies
+## Applied Technologies
 
-* React
-* HTML
-* CSS / Bootstrap
-* Node.js
-* Jest / Puppeteer
-* Javascript 
-* Express 
-* Knex
-* PostgreSQL API
+<table border="0">
+ <tr>
+    <td>* React</td>
+    <td>* Node.js</td>
+    <td>* Express </td>
+ </tr>
+ <tr>
+    <td>* HTML</td>
+    <td>* Jest / Puppeteer</td>
+    <td>* Knex</td>
+ </tr>
+   <tr>
+    <td>* CSS / Bootstrap</td>
+    <td>* Javascript </td>
+    <td>* PostgreSQL API</td>
+ </tr>
+</table>
 
 ## API Documentation
 
 | Route                     | Method     |                          Description                             |
-| ------------------------- | :----------: | :---------------------------------------------------------------- |
+| --------------------------- | :------------: | :------------------------------------------------------------------ |
 | `./reservations`          |  GET | Returns a list of reservations for the current date  |
 | `./reservations?{date}`    |  GET | Returns a list of reservations for the given date |
 | `./reservations/new`          |  POST | Returns a list of reservations for the current date  |
