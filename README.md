@@ -27,6 +27,10 @@ A live version of the project can be viewed [here][Live Version] .
  </tr>
 </table>
 
+## Screenshots
+
+
+
 ## API Documentation
 
 | Route                     | Method     |                          Description                             |
@@ -45,17 +49,15 @@ A live version of the project can be viewed [here][Live Version] .
 
 ## Installation
 
-Fork and clone this repository.
-Run cp ./back-end/.env.sample ./back-end/.env.
-Update the ./back-end/.env file with db connections. You can set some up for free with ElephantSQL database instances.
-Run cp ./front-end/.env.sample ./front-end/.env.
-You should not need to make changes to the ./front-end/.env file unless you want to connect to a backend at a location other than http://localhost:5000.
-Run npm install to install project dependencies.
-Run npm run start:dev from the back-end directory to start your server in development mode.
-Run npm start from the front-end directory to start the React app at http://localhost:3000.
-
-Links:
+1. Fork and clone this repository.
+2. Run cp ./back-end/.env.sample ./back-end/.env.
+3. Update the ./back-end/.env file with db connections. You can set some up for free with ElephantSQL database instances.
+4. Run cp ./front-end/.env.sample ./front-end/.env.
+5. You should not need to make changes to the ./front-end/.env file unless you want to connect to a backend at a location other than http://localhost:5000.
+6. Run npm install to install project dependencies.
+7. Run npm run start:dev from the back-end directory to start your server in development mode.
+8. Run npm start from the front-end directory to start the React app at http://localhost:3000.
   
 [Live Version]: https://periodic-tables-restaurant-reservation-fo68.onrender.com/dashboard?date=2023-09-21
 
-> **Hint** The same validation used for create applies to editing a reservation. The form and the API for updating a reservation must not allow the user to violate any of the rules specified when creating a reservation.
+
