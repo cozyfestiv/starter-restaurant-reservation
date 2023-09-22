@@ -1,7 +1,7 @@
 # Thinkful Capstone: Restaurant Reservation System
 
 
-This is a full-stack application completed as a captstone project for the Thinkful's full-stack software engineering program. This application allows a restauarant to manage reservations, by creating, editing, seating and canceling reservations. It includes a search feature for finding reservations by phone number. 
+This is a full-stack application completed as a capstone project for Thinkful's full-stack software engineering program. This application allows a restauarant to manage reservations by creating, editing, seating, and canceling reservations. It includes a search feature for finding reservations by phone number. 
 
 ## Live Demo
 
