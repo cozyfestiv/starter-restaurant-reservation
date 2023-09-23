@@ -7,7 +7,6 @@ export const ReservationsList = ({ reservations, filterResults }) => {
   const [cancelError, setCancelError] = useState(null);
   const history = useHistory();
 
-  // Filters out reservations that are finished or cancelled
   function checkStatus (reservation) {
     return (
       reservation.status === 'finished' || reservation.status === 'cancelled'
@@ -39,7 +38,6 @@ export const ReservationsList = ({ reservations, filterResults }) => {
   function renderReservations (reservations) {
     if (reservations.length) {
       return reservations.map(reservation => {
-        // Dashboard shows only booked and seated results, whereas Search shows all results
         return filterResults && checkStatus(reservation) ? (
           ''
         ) : (

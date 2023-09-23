@@ -17,7 +17,6 @@ function NewTable () {
     let value = target.value;
     let name = target.name;
 
-    // should typeof value === num?
     if (name === 'capacity') {
       value = Number(value);
     }

@@ -75,8 +75,6 @@ function ReservationForm () {
     return () => abortController.abort();
   };
 
-  // console.log(formatAsDate(form.reservation_date), '$$$$$$$$$$$$$$$$$$$$$$$$');
-
   return (
     <>
       {reservation_id ? <h2>Edit Reservation</h2> : <h2>Make a Reservation</h2>}
