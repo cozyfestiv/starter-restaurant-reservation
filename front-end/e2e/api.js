@@ -1,12 +1,13 @@
-const fetch = require("cross-fetch");
+const fetch = require('cross-fetch');
 
 const API_BASE_URL =
-  process.env.REACT_APP_API_BASE_URL || "http://localhost:5001";
+  process.env.REACT_APP_API_BASE_URL ||
+  'https://periodic-tables-restaurant-reservation-8mvp.onrender.com/';
 
 /**
  * Defines the default headers for these functions to work with `json-server`
  */
-const headers = { "Content-Type": "application/json" };
+const headers = { 'Content-Type': 'application/json' };
 
 /**
  * Fetch `json` from the specified URL and handle error status codes and ignore `AbortError`s
@@ -23,7 +24,7 @@ const headers = { "Content-Type": "application/json" };
  *  a promise that resolves to the `json` data or an error.
  *  If the response is not in the 200 - 399 range the promise is rejected.
  */
-async function fetchJson(url, options, onCancel) {
+async function fetchJson (url, options, onCancel) {
   try {
     const response = await fetch(url, options);
 
@@ -38,7 +39,7 @@ async function fetchJson(url, options, onCancel) {
     }
     return payload.data;
   } catch (error) {
-    if (error.name !== "AbortError") {
+    if (error.name !== 'AbortError') {
       console.error(error.stack);
       throw error;
     }
@@ -51,13 +52,13 @@ async function fetchJson(url, options, onCancel) {
  * @returns {Promise<[reservation]>}
  *  a promise that resolves to the newly created reservation.
  */
-async function createReservation(reservation, signal) {
+async function createReservation (reservation, signal) {
   const url = `${API_BASE_URL}/reservations`;
   const options = {
-    method: "POST",
+    method: 'POST',
     headers,
     body: JSON.stringify({ data: reservation }),
-    signal,
+    signal
   };
   return await fetchJson(url, options, reservation);
 }
@@ -67,23 +68,23 @@ async function createReservation(reservation, signal) {
  * @returns {Promise<[table]>}
  *  a promise that resolves to the newly created table.
  */
-async function createTable(table, signal) {
+async function createTable (table, signal) {
   const url = `${API_BASE_URL}/tables`;
   const options = {
-    method: "POST",
+    method: 'POST',
     headers,
     body: JSON.stringify({ data: table }),
-    signal,
+    signal
   };
   return await fetchJson(url, options, table);
 }
 
-async function seatReservation(reservation_id, table_id) {
+async function seatReservation (reservation_id, table_id) {
   const url = `${API_BASE_URL}/tables/${table_id}/seat`;
   const options = {
-    method: "PUT",
+    method: 'PUT',
     body: JSON.stringify({ data: { reservation_id } }),
-    headers,
+    headers
   };
   return await fetchJson(url, options, {});
 }
@@ -91,5 +92,5 @@ async function seatReservation(reservation_id, table_id) {
 module.exports = {
   createReservation,
   createTable,
-  seatReservation,
+  seatReservation
 };
