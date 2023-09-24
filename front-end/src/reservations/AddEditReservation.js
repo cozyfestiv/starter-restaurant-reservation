@@ -57,7 +57,7 @@ function ReservationForm () {
     const abortController = new AbortController();
     if (!reservation_id) {
       setReservationsError(null);
-      createReservation(form)
+      createReservation(form, abortController.signal)
         .then(() => history.push(`/dashboard?date=${form.reservation_date}`))
         .catch(setReservationsError);
     }
