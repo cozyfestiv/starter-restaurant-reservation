@@ -42,10 +42,6 @@ function ReservationForm () {
       value = formatAsTime(value);
     }
 
-    if (name === 'reservation_date') {
-      value = formatAsDate(value);
-    }
-
     setForm({
       ...form,
       [name]: value
@@ -78,8 +74,10 @@ function ReservationForm () {
   return (
     <>
       {reservation_id ? <h2>Edit Reservation</h2> : <h2>Make a Reservation</h2>}
-      <form onSubmit={handleSubmit}>
+      <div className='alert-danger'>
         <ErrorAlert error={reservationsError} />
+      </div>
+      <form onSubmit={handleSubmit}>
         <div className='container'>
           <div className='form-group formDivCreate'>
             <label htmlFor='first_name'>
