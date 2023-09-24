@@ -8,7 +8,7 @@ import {
 import { formatAsTime, formatAsDate } from '../utils/date-time';
 import ErrorAlert from '../layout/ErrorAlert';
 
-function AddEditReservation () {
+function ReservationForm () {
   const { reservation_id } = useParams();
   const initialFormState = {
     first_name: '',
@@ -190,4 +190,4 @@ function AddEditReservation () {
   );
 }
 
-export default AddEditReservation;
+export default ReservationForm;
