@@ -12,7 +12,7 @@ function Table ({ table }) {
   const finishedHandler = ({ target }) => {
     if (
       window.confirm(
-        'Is this table ready to seat new guests? THis cannot be undone.'
+        'Is this table ready to seat new guests? This cannot be undone.'
       )
     ) {
       const tableId = target.id;
