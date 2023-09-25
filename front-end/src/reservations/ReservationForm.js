@@ -53,7 +53,9 @@ function ReservationForm () {
     const abortController = new AbortController();
     if (!reservation_id) {
       setReservationsError(null);
-      createReservation(form, abortController.signal)
+      const newFormData = { ...form };
+      newFormData.reservation_time = formatAsTime(newFormData.reservation_time);
+      createReservation(newFormData, abortController.signal)
         .then(() => history.push(`/dashboard?date=${form.reservation_date}`))
         .catch(setReservationsError);
     }
@@ -74,9 +76,7 @@ function ReservationForm () {
   return (
     <>
       {reservation_id ? <h2>Edit Reservation</h2> : <h2>Make a Reservation</h2>}
-      <div className='alert-danger'>
-        <ErrorAlert error={reservationsError} />
-      </div>
+      <ErrorAlert error={reservationsError} />
       <form onSubmit={handleSubmit}>
         <div className='container'>
           <div className='form-group formDivCreate'>
