@@ -71,12 +71,15 @@ function Seat () {
               </option>
             ))}
           </select>
-          <button type='submit' className='btn btn primary mx-2'>
+          <button
+            type='submit'
+            className='btn submitBtn font-weight-bolder mx-2'
+          >
             Submit
           </button>
           <button
             type='button'
-            className='btn btn-secondary mx-2'
+            className='btn cancelBtn font-weight-bolder mx-2'
             onClick={() => history.goBack()}
           >
             Cancel
