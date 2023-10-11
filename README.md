@@ -30,11 +30,9 @@ A live version of the project can be viewed [here][Live Version] .
 ## Screenshots
 
 ![Dashboard](/images/Dashboard.png)
-<p align="center">
-<img src="/images/Dashboard-Mobile.png width="50%" />
-<img src="/images/Search-mobile.png" width="50%" />
-</p>
 ![New Reservation](/images/Reservation.png)
+![Mobile](/images/Mobile.png)
+
 
 
 
@@ -65,6 +63,6 @@ A live version of the project can be viewed [here][Live Version] .
 7. Run npm run start:dev from the back-end directory to start your server in development mode.
 8. Run npm start from the front-end directory to start the React app at http://localhost:3000.
   
-[Live Version]: https://periodic-tables-restaurant-reservation-fo68.onrender.com/dashboard
+[Live Version]: https://periodic-tables-restaurant-reservation-fo68.onrender.com/
 
 
