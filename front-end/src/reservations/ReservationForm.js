@@ -55,7 +55,6 @@ function ReservationForm () {
       setReservationsError(null);
       const newFormData = { ...form };
       newFormData.reservation_time = formatAsTime(newFormData.reservation_time);
-      console.log(newFormData.reservation_time, '%%%%%%%%%');
       createReservation(newFormData, abortController.signal)
         .then(() => history.push(`/dashboard?date=${form.reservation_date}`))
         .catch(setReservationsError);
