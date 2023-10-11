@@ -30,8 +30,10 @@ A live version of the project can be viewed [here][Live Version] .
 ## Screenshots
 
 ![Dashboard](/images/Dashboard.png)
-![Dashboard Mobile](/images/Dashboard-Mobile.png)
-![Search](/images/Search-mobile.png)
+<p align="center">
+<img src="/images/Dashboard-Mobile.png width="50%" />
+<img src="/images/Search-mobile.png" width="50%" />
+</p>
 ![New Reservation](/images/Reservation.png)
 
 
