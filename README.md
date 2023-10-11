@@ -33,9 +33,6 @@ A live version of the project can be viewed [here][Live Version] .
 ![New Reservation](/images/Reservation.png)
 ![Mobile](/images/Mobile.png)
 
-
-
-
 ## API Documentation
 
 | Route                     | Method     |                          Description                             |
