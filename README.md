@@ -29,7 +29,7 @@ A live version of the project can be viewed [here][live version] .
 ## Screenshots
 
 ![Dashboard](/images/Dashboard.png)
-![New Reservation](/images/Reservation.png)
+<img src="/images/Reservation.png" width="100%")>
 ![Mobile](/images/Mobile.png)
 
 ## API Documentation
