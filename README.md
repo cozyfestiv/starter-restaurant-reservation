@@ -29,6 +29,8 @@ A live version of the project can be viewed [here][Live Version] .
 
 ## Screenshots
 
+![Dashboard](/images/Dashboard.png)
+![Dashboard Mobile](/images/Dashboard-mobile.png)
 
 
 ## API Documentation
