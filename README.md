@@ -30,18 +30,14 @@ A live version of the project can be viewed [here][Live Version] .
 ## Screenshots
 
 ![Dashboard](/images/Dashboard.png)
-<p align="center">
-<img src="/images/Dashboard-Mobile.png width="50%" />
-<img src="/images/Search-mobile.png" width="50%" />
-</p>
 ![New Reservation](/images/Reservation.png)
-
+![Mobile](/images/Mobile.png)
 
 
 ## API Documentation
 
 | Route                     | Method     |                          Description                             |
-| ------------------------- | :----------: | :---------------------------------------------------------------------- |
+| :------------------------- | :----------: | :---------------------------------------------------------------------- |
 | `/reservations`          |  GET | Returns a list of reservations for the current date  |
 | `/reservations?{date}`    |  GET | Returns a list of reservations for the given date |
 | `/reservations/new`          |  POST | Returns a list of reservations for the current date  |
