@@ -15,7 +15,12 @@ function Menu () {
       <div className='container-fluid d-flex flex-column p-0'>
         <div className='d-flex flex-column'>
           <section>
-            <img src={Logo} alt='Periodic Tables Logo'></img>
+            <img
+              src={Logo}
+              alt='Periodic Tables Logo'
+              className='img-fluid'
+              style={{ maxWidth: '100%' }}
+            ></img>
             <Link className='navbar-brand' to='/'>
               <div className='sidebar-brand-text font-weight-bolder mx-3'>
                 <span className='title'>Periodic Tables</span>

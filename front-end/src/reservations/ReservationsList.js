@@ -78,7 +78,7 @@ export const ReservationsList = ({ reservations, filterResults }) => {
                       to={`/reservations/${reservation.reservation_id}/seat`}
                     >
                       <button
-                        className='btn submitBtn font-weight-bolder mr-2'
+                        className='btn submitBtn font-weight-bolder mr-2 mb-2'
                         href={`/reservations/${reservation.reservation_id}/seat`}
                       >
                         Seat
@@ -88,14 +88,14 @@ export const ReservationsList = ({ reservations, filterResults }) => {
                       to={`/reservations/${reservation.reservation_id}/edit`}
                     >
                       <button
-                        className='btn editBtn font-weight-bolder mr-2'
+                        className='btn editBtn font-weight-bolder mr-2 mb-2'
                         href={`/reservations/${reservation.reservation_id}/edit`}
                       >
                         Edit
                       </button>
                     </Link>
                     <button
-                      className='btn cancelBtn font-weight-bolder mx-2'
+                      className='btn cancelBtn font-weight-bolder mx-2 mb-2'
                       type='button'
                       data-reservation-id-cancel={reservation.reservation_id}
                       value={reservation.reservation_id}
