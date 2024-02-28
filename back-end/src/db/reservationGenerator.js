@@ -87,7 +87,7 @@ function generator (n) {
       mobile_number: '202-555-0153',
       reservation_date: '2020-12-30',
       reservation_time: '20:00',
-      people: 1,
+      people: 2,
       created_at: '2020-12-10T08:31:32.326Z',
       updated_at: '2020-12-10T08:31:32.326Z'
     },
@@ -97,7 +97,7 @@ function generator (n) {
       mobile_number: '808-555-0141',
       reservation_date: '2020-12-30',
       reservation_time: '18:00',
-      people: 1,
+      people: 2,
       created_at: '2020-12-10T08:31:32.326Z',
       updated_at: '2020-12-10T08:31:32.326Z'
     },
@@ -137,7 +137,7 @@ function generator (n) {
       mobile_number: randomName1.tel,
       reservation_date: formattedTomorrow,
       reservation_time: '18:00',
-      people: Math.floor(Math.random() * 6),
+      people: Math.floor(Math.random() * 5) + 2,
       status: 'booked',
       created_at: '2024-01-07T08:31:32.326Z',
       updated_at: '2024-01-07T08:31:32.326Z'
@@ -149,7 +149,7 @@ function generator (n) {
       mobile_number: randomName2.tel,
       reservation_date: formattedTomorrow,
       reservation_time: '17:45',
-      people: Math.floor(Math.random() * 6),
+      people: Math.floor(Math.random() * 5) + 2,
       status: 'booked',
       created_at: '2024-01-07T08:31:32.326Z',
       updated_at: '2024-01-07T08:31:32.326Z'
@@ -161,7 +161,7 @@ function generator (n) {
       mobile_number: randomName3.tel,
       reservation_date: formattedTomorrow,
       reservation_time: '19:30',
-      people: Math.floor(Math.random() * 6),
+      people: Math.floor(Math.random() * 5) + 2,
       status: 'booked',
       created_at: '2024-01-07T08:31:32.326Z',
       updated_at: '2024-01-07T08:31:32.326Z'
