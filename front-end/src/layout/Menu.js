@@ -1,4 +1,5 @@
 import React from 'react';
+import Logo from '../assets/logo.png';
 
 import { Link } from 'react-router-dom';
 
@@ -14,6 +15,7 @@ function Menu () {
       <div className='container-fluid d-flex flex-column p-0'>
         <div className='d-flex flex-column'>
           <section>
+            <img src={Logo} alt='Periodic Tables Logo'></img>
             <Link className='navbar-brand' to='/'>
               <div className='sidebar-brand-text font-weight-bolder mx-3'>
                 <span className='title'>Periodic Tables</span>

@@ -42,7 +42,7 @@ export const ReservationsList = ({ reservations, filterResults }) => {
           ''
         ) : (
           <div
-            className='card text-center text-white bg-dark cards mb-4'
+            className='card text-center text-dark bg-light cards mb-4'
             key={reservation.reservation_id}
           >
             <div>
@@ -52,12 +52,12 @@ export const ReservationsList = ({ reservations, filterResults }) => {
                     <h4 className='card-title'>
                       {reservation.first_name} {reservation.last_name}{' '}
                     </h4>
-                    <p className='card-text'>Party of {reservation.people}</p>
+                    <h4 className='card-title'>
+                      {getTimeFormat(reservation.reservation_time)}
+                    </h4>
                   </div>
                   <div className='card-body'>
-                    <p className='card-title'>
-                      {getTimeFormat(reservation.reservation_time)}
-                    </p>
+                    <p className='card-text'>Party of {reservation.people}</p>
                     <p className='card-text'>
                       Phone Number : {reservation.mobile_number}
                     </p>
