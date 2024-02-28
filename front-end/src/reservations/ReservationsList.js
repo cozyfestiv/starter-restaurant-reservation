@@ -41,17 +41,22 @@ export const ReservationsList = ({ reservations, filterResults }) => {
         return filterResults && checkStatus(reservation) ? (
           ''
         ) : (
-          <div className='card cards mb-4' key={reservation.reservation_id}>
-            <div className='card-body'>
+          <div
+            className='card text-center text-white bg-dark cards mb-4'
+            key={reservation.reservation_id}
+          >
+            <div>
               <div className='item-quad'>
                 <div className='group-col no-gap'>
-                  <h4 className='card-title'>
-                    {reservation.first_name} {reservation.last_name}{' '}
-                  </h4>
-                  <p className='card-text'>Party of {reservation.people}</p>
-                  <div>
-                    <p className='card-text'>
-                      Time : {getTimeFormat(reservation.reservation_time)}
+                  <div className='card-header d-flex justify-content-between'>
+                    <h4 className='card-title'>
+                      {reservation.first_name} {reservation.last_name}{' '}
+                    </h4>
+                    <p className='card-text'>Party of {reservation.people}</p>
+                  </div>
+                  <div className='card-body'>
+                    <p className='card-title'>
+                      {getTimeFormat(reservation.reservation_time)}
                     </p>
                     <p className='card-text'>
                       Phone Number : {reservation.mobile_number}
