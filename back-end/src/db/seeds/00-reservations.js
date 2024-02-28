@@ -1,4 +1,5 @@
-const reservationsData = require('./00-reservations.json');
+const { generator } = require('../reservationGenerator');
+const reservationsData = generator(500);
 
 exports.seed = function (knex) {
   return knex
