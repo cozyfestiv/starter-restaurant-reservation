@@ -39,42 +39,46 @@ function NewTable () {
   };
 
   return (
-    <div>
-      <h2 className='heading'>New Table</h2>
-      <form onSubmit={handleSubmit}>
-        <ErrorAlert error={tableFormErrors} />
-        <div className='container'>
-          <div className='form-group'>
-            <label htmlFor='table_name'>
-              Table Name:
-              <input
-                className='form-control'
-                type='text'
-                id='table_name'
-                name='table_name'
-                placeholder='Enter table name'
-                onChange={handleChange}
-                required={true}
-              />
-            </label>
-          </div>
+    <div className='card cards mx-5 mt-5'>
+      <form onSubmit={handleSubmit} className=''>
+        <div className='card-header'>
+          <h2 className='heading '>New Table</h2>
+        </div>
+        <div className='card-body'>
+          <ErrorAlert error={tableFormErrors} />
+          <div className='container'>
+            <div className='form-group d-flex justify-content-center'>
+              <label htmlFor='table_name' className='w-75 px-5 text-center'>
+                Table Name:
+                <input
+                  className='form-control'
+                  type='text'
+                  id='table_name'
+                  name='table_name'
+                  placeholder='Enter table name'
+                  onChange={handleChange}
+                  required={true}
+                />
+              </label>
+            </div>
 
-          <div className='form-group'>
-            <label htmlFor='capacity'>
-              Capacity:
-              <input
-                className='form-control'
-                type='number'
-                id='capacity'
-                name='capacity'
-                placeholder='Enter capacity here'
-                onChange={handleChange}
-                required={true}
-              />
-            </label>
+            <div className='form-group d-flex justify-content-center'>
+              <label htmlFor='capacity' className='w-75 px-5 text-center'>
+                Capacity:
+                <input
+                  className='form-control'
+                  type='number'
+                  id='capacity'
+                  name='capacity'
+                  placeholder='Enter capacity here'
+                  onChange={handleChange}
+                  required={true}
+                />
+              </label>
+            </div>
           </div>
         </div>
-        <span>
+        <div className='d-flex justify-content-center card-footer'>
           <button type='submit' className='btn submitBtn font-weight-bolder'>
             Submit
           </button>
@@ -85,7 +89,7 @@ function NewTable () {
           >
             Cancel
           </button>
-        </span>
+        </div>
       </form>
     </div>
   );
