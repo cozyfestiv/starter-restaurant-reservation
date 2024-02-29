@@ -6,7 +6,6 @@ import formatReservationDate from './format-reservation-date';
 import formatReservationTime from './format-reservation-date';
 
 const API_BASE_URL =
-  process.env.REACT_APP_API_BASE_URL ||
   'https://periodic-tables-restaurant-reservation-8mvp.onrender.com';
 
 /**
@@ -91,10 +90,7 @@ export async function updateReservationDetails (
   reservation_id,
   signal
 ) {
-  //construct the URL
   const url = `${API_BASE_URL}/reservations/${reservation_id}`;
-  //Perform an async operation using fetchJson
-  //send a PUT request to update the reservation details
   return await fetchJson(
     url,
     {
