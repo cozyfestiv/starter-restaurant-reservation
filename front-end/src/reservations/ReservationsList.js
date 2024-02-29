@@ -63,7 +63,7 @@ export const ReservationsList = ({ reservations, filterResults }) => {
                       {getTimeFormat(reservation.reservation_time)}
                     </h4>
                   </div>
-                  <div className='card-body d-flex justify-content-between'>
+                  <div className='card-body d-flex justify-content-between align-items-center'>
                     <div className='d-flex flex-column justify-content-center align-items-start pl-2'>
                       <p className='card-text'>Party of {reservation.people}</p>
                       <p className='card-text'>
@@ -86,7 +86,7 @@ export const ReservationsList = ({ reservations, filterResults }) => {
                           reservation.reservation_id % imgSources.length
                         ]
                       }
-                      style={{ width: '150px' }}
+                      style={{ width: '100px', height: '100px' }}
                       alt={`Reservation ${reservation.reservation_id}`}
                     />
                   </div>

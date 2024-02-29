@@ -27,33 +27,36 @@ function Table ({ table }) {
   return (
     <>
       <ErrorAlert error={finishError} />
-      <div className='card cards mb-2'>
-        <div className='card-body'>
-          <h5 className='card-title'>Table: {table.table_name}</h5>
-          <div>
-            <ul class='list-group list-group-flush'>
-              <li class='list-group-item'>
-                <h6>
-                  <span data-table-id-status={`${table.table_id}`}>
-                    Status: {occupied ? 'Occupied' : 'Free'}
-                  </span>
-                </h6>
-              </li>
-              <li class='list-group-item'>
-                {table.reservation_id && (
-                  <button
-                    data-table-id-finish={table.table_id}
-                    value={table.reservation_id}
-                    id={table.table_id}
-                    className='btn navBtn font-weight-bolder'
-                    onClick={finishedHandler}
-                  >
-                    Finish
-                  </button>
-                )}
-              </li>
-            </ul>
-          </div>
+      <div className='card cards flex-grow-1 mx-2 mb-2 '>
+        <div className='card-header'>
+          <h5 className='card-title mb-0'>Table: {table.table_name}</h5>
+        </div>
+        <div className='card-body py-2 pr-0 pl-2'>
+          <ul className='list-group list-group-flush'>
+            <li className='list-group-item pl-2 pr-0 py-0'>
+              <h6 className='pr-2'>
+                <p data-table-id-status={`${table.table_id}`}>
+                  Status: {occupied ? 'Occupied' : 'Free'}
+                </p>
+                <p className='mb-0'>Seats: {table.capacity}</p>
+              </h6>
+            </li>
+          </ul>
+        </div>
+        <div className='card-footer d-flex justify-content-end'>
+          {table.reservation_id ? (
+            <button
+              data-table-id-finish={table.table_id}
+              value={table.reservation_id}
+              id={table.table_id}
+              className='btn navBtn [font-weight-bolder'
+              onClick={finishedHandler}
+            >
+              Finish
+            </button>
+          ) : (
+            <p className='my-3'></p>
+          )}
         </div>
       </div>
     </>

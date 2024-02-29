@@ -13,11 +13,13 @@ function TableList () {
     return () => abortController.abort();
   }
 
-  const list = tables.map(table => (
-    <div className='' key={table.table_id}>
-      <Table table={table} />
+  const list = (
+    <div className='d-flex flex-wrap'>
+      {tables.map(table => (
+        <Table key={table.table_id} table={table} />
+      ))}
     </div>
-  ));
+  );
 
   return <>{list}</>;
 }
