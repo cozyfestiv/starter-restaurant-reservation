@@ -14,7 +14,7 @@ function TableList () {
   }
 
   const list = (
-    <div className='d-flex flex-wrap'>
+    <div className='d-flex flex-column'>
       {tables.map(table => (
         <Table key={table.table_id} table={table} />
       ))}

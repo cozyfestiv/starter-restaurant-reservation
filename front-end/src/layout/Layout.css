@@ -67,10 +67,12 @@ h4 {
 }
 
 .prevNext {
-  border-color: #123b6c;
   color: #123b6c;
-  border-width: 2px;
   background-color: white;
+}
+
+.prevNext:hover {
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* --- Forms ----*/

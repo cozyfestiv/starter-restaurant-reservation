@@ -65,8 +65,10 @@ export const ReservationsList = ({ reservations, filterResults }) => {
                   </div>
                   <div className='card-body d-flex justify-content-between align-items-center'>
                     <div className='d-flex flex-column justify-content-center align-items-start pl-2'>
-                      <p className='card-text'>Party of {reservation.people}</p>
-                      <p className='card-text'>
+                      <p className='card-text mb-1'>
+                        Party of {reservation.people}
+                      </p>
+                      <p className='card-text mb-1'>
                         Phone:{' '}
                         <a href={`tel:${reservation.mobile_number}`}>
                           {reservation.mobile_number}
@@ -74,12 +76,12 @@ export const ReservationsList = ({ reservations, filterResults }) => {
                       </p>
 
                       <p
-                        className='card-text mb-3'
+                        className='card-text mb-1'
                         data-reservation-id-status={reservation.reservation_id}
                       >
                         Status: {reservation.status}
                       </p>
-                      <p className='card-text mb-3'>
+                      <p className='card-text mb-1'>
                         Date: {reservation.reservation_date}
                       </p>
                     </div>
