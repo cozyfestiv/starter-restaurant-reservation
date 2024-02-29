@@ -79,6 +79,9 @@ export const ReservationsList = ({ reservations, filterResults }) => {
                       >
                         Status: {reservation.status}
                       </p>
+                      <p className='card-text mb-3'>
+                        Date: {reservation.reservation_date}
+                      </p>
                     </div>
                     <img
                       src={

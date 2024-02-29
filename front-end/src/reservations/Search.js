@@ -28,36 +28,47 @@ export const Search = () => {
 
   return (
     <section>
-      <h2>Search</h2>
-      <div>
-        <form onSubmit={submitHandler}>
-          <div className='form-group'>
-            <label htmlFor='mobile_number'>Mobile Number:</label>
-            <input
-              className='form-control'
-              id='mobile_number'
-              name='mobile_number'
-              type='text'
-              required={true}
-              placeholder="Enter a customer's phone number"
-              value={mobileNumber}
-              maxLength='12'
-              onChange={changeHandler}
+      <form onSubmit={submitHandler}>
+        <div className='card cards mx-5 mt-5'>
+          <div className='card-header'>
+            <h2 className='heading'>Search</h2>
+          </div>
+          <div className='card-body'>
+            <div className='form-group'>
+              <label htmlFor='mobile_number'>Mobile Number:</label>
+              <input
+                className='form-control'
+                id='mobile_number'
+                name='mobile_number'
+                type='text'
+                required={true}
+                placeholder="Enter a customer's phone number"
+                value={mobileNumber}
+                maxLength='12'
+                onChange={changeHandler}
+              />
+            </div>
+          </div>
+          <div className='card-footer'>
+            <button
+              type='submit'
+              className='btn submitBtn font-weight-bolder mb-4'
+            >
+              Find
+            </button>
+          </div>
+        </div>
+      </form>
+      {submitted ? (
+        <>
+          <h2 className='my-4'>Results</h2>
+          <div className='m-5'>
+            <ReservationsList
+              reservations={reservations}
+              filterResults={filterResults}
             />
           </div>
-          <button
-            type='submit'
-            className='btn submitBtn font-weight-bolder mb-4'
-          >
-            Find
-          </button>
-        </form>
-      </div>
-      {submitted ? (
-        <ReservationsList
-          reservations={reservations}
-          filterResults={filterResults}
-        />
+        </>
       ) : (
         ''
       )}
