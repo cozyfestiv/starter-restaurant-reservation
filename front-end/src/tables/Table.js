@@ -27,7 +27,7 @@ function Table ({ table }) {
   return (
     <>
       <ErrorAlert error={finishError} />
-      <div className='card cards flex-grow-1 mx-2 mb-2 '>
+      <div className='card cards flex-grow-1 mx-1 mb-2 '>
         <div className='card-header d-flex justify-content-between'>
           <h5 className='card-title mb-0 d-flex align-items-center'>
             Table: {table.table_name}
@@ -43,7 +43,7 @@ function Table ({ table }) {
               Finish
             </button>
           ) : (
-            <p className='my-3'></p>
+            <p className='my-2'></p>
           )}
         </div>
         <div className='card-body py-2 pr-0 pl-2'>
